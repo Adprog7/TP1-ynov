@@ -35,6 +35,57 @@
       "total": 4860,
       "status": "CONFIRMED",
       "createdAt": "2026-10-19T09:24:27.227Z"
+    },
+    {
+      "id": "b1792407573298",
+      "screeningId": "s1",
+      "email": "a@b.fr",
+      "seats": 2,
+      "tariff": "NORMAL",
+      "total": 2300,
+      "status": "CONFIRMED",
+      "createdAt": "2026-10-19T10:59:33.298Z"
+    },
+    {
+      "id": "b1792411273648",
+      "screeningId": "s1",
+      "email": "a@b.fr",
+      "seats": 2,
+      "tariff": "STUDENT",
+      "total": 1610,
+      "status": "CONFIRMED",
+      "createdAt": "2026-10-19T12:01:13.648Z"
+    },
+    {
+      "id": "b1792411396336",
+      "screeningId": "s1",
+      "email": "a@b.fr",
+      "seats": 4,
+      "tariff": "NORMAL",
+      "total": 4140,
+      "status": "CONFIRMED",
+      "createdAt": "2026-10-19T12:03:16.336Z"
+    },
+    {
+      "id": "b1792411481990",
+      "screeningId": "s1",
+      "email": "a@b.fr",
+      "seats": 4,
+      "tariff": "STUDENT",
+      "total": 2898,
+      "status": "CONFIRMED",
+      "createdAt": "2026-10-19T12:04:41.990Z"
+    },
+    {
+      "id": "b1792412775607",
+      "screeningId": "s1",
+      "email": "a@b.fr",
+      "seats": 2,
+      "tariff": "NORMAL",
+      "total": 2300,
+      "status": "CANCELLED",
+      "createdAt": "2026-10-19T12:26:15.607Z",
+      "cancelledAt": "2026-10-19T12:26:28.415Z"
     }
   ]
 }
