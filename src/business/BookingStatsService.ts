@@ -18,4 +18,7 @@ export class BookingStatsService {
 
     return taken;
   }
+    countRemainingSeats(capacity: number, taken: number): number {
+    return capacity - taken;
+  }
 }

@@ -5,7 +5,10 @@ import { BookingError } from "./BookingError";
 import { Payment } from "../data/Payment";
 import { Mailer } from "../data/Mailer";
 import { BookingStatsService } from "./BookingStatsService";
+import { calculatePrice } from "./price";
 
+const MAX_SEATS_PER_BOOKING = 6;
+const CANCELLATION_DEADLINE_MS = 2 * 60 * 60 * 1000;
 export class BookingService {
   private bookingRepository = new BookingRepository();
   private screeningRepository = new ScreeningRepository();
@@ -52,10 +55,10 @@ createBooking(
 
   const seats = Number(seatsInput);
 
-  if (!Number.isInteger(seats) || seats < 1 || seats > 6) {
+  if (!Number.isInteger(seats) || seats < 1 || seats > MAX_SEATS_PER_BOOKING) {
     throw new BookingError(
       "INVALID_SEATS",
-      "Entre 1 et 6 places par réservation"
+      `Entre 1 et ${MAX_SEATS_PER_BOOKING} places par réservation`
     );
   }
 
@@ -72,17 +75,7 @@ createBooking(
     throw new BookingError("NOT_ENOUGH_SEATS", "Plus assez de places");
   }
 
-  let unit = screening.price;
-
-  if (tariff === "STUDENT") {
-    unit = Math.round(unit * 0.7);
-  }
-
-  let total = unit * seats;
-
-  if (seats >= 4) {
-    total = Math.round(total * 0.9);
-  }
+  const total = calculatePrice(screening.price, seats, tariff);
 
   if (!this.payment.pay()) {
     throw new BookingError("PAYMENT_REFUSED", "Paiement refusé");
@@ -133,7 +126,7 @@ cancelBooking(id: string) {
   const diff =
     new Date(screening.startsAt).getTime() - new Date().getTime();
 
-  if (diff < 2 * 60 * 60 * 1000) {
+  if (diff < CANCELLATION_DEADLINE_MS) {
     throw new BookingError(
       "CANCELLATION_TOO_LATE",
       "Annulation impossible moins de 2h avant la séance"
