@@ -5,8 +5,8 @@
   "main": "src/server.ts",
   "scripts": {
     "seed": "tsx script/seed.ts",
-    "start": "tsx src/server.ts",
-    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/main.ts",
+    "dev": "tsx watch src/main.ts",
     "test": "vitest run --passWithNoTests",
     "typecheck": "tsc"
   },

@@ -39,23 +39,6 @@ router.get("/screenings", (_req, res) => {
   res.json(screeningService.listUpcomingScreenings());
 });
 
-router.post(
-  "/screenings/:id/bookings",
-  (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const booking = bookingService.createBooking(
-        req.params.id,
-        req.body.email,
-        req.body.seats,
-        req.body.tariff
-      );
-
-      return res.status(201).json(booking);
-    } catch (error) {
-      return handleError(error, res, next);
-    }
-  }
-);
 
 router.delete(
   "/bookings/:id",
