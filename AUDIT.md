@@ -132,3 +132,29 @@ graph TD
 | `Mailer` (`console.log`) | Non | Instancié avec `new`. On pourrait espionner `console.log`, mais ce n'est pas un vrai remplacement. |
 | Le temps (`new Date`, `Date.now`) | Non | Appelés directement dans le service, pas de moyen de figer l'horloge. |
 | Le disque (`fs`, `db.json`) | Non | `JsonDatabase` lit et écrit toujours le vrai fichier. |
+
+
+## 6. Bilan : testabilité après le découpage en couches
+
+### Ce qu'on peut tester sans serveur ni `data/db.json`
+
+| Règle | Où elle se trouve | Pourquoi c'est testable |
+|---|---|---|
+| Calcul du prix (tarif étudiant -30 %, remise groupe -10 %, arrondis) | `price.ts` (`calculatePrice`) | Fonction pure : entrées en paramètres, résultat renvoyé, aucune dépendance. Testée dans `tests/price.test.ts`. |
+| Calcul des places restantes | `BookingStatsService.countRemainingSeats` | Simple soustraction sur des nombres, sans lecture du disque. |
+
+### Ce qui reste impossible à tester
+
+| Règle | Pourquoi |
+|---|---|
+| Email invalide, nombre de places hors 1-6 | Ces contrôles sont dans `createBooking`, après `findById`, qui lit `db.json`. Pour atteindre la validation il faut d'abord un vrai fichier. |
+| Séance introuvable, séance déjà commencée | Lecture du disque + `new Date()` : le résultat dépend de l'heure réelle et du contenu de `db.json`. |
+| Capacité dépassée | `countTakenSeats` lit les réservations sur le disque. |
+| Paiement refusé | `Payment` utilise `Math.random()`, instancié avec `new` : on ne peut pas forcer le résultat. |
+| Annulation à moins de 2 h | Dépend de `new Date()` : impossible de figer l'heure. |
+| E-mails de confirmation et d'annulation | `Mailer` écrit avec `console.log`, sans moyen de le remplacer proprement. |
+| Création et enregistrement d'une réservation | Écrit dans le vrai `db.json`, avec un id basé sur `Date.now()`. |
+
+### Cause commune
+
+Le découpage en couches a séparé les responsabilités, mais pas les dépendances : chaque service crée ses collaborateurs avec `new` (repositories, paiement, mailer), et appelle directement `new Date()` et `Date.now()`. Rien ne peut donc être remplacé dans un test. Pour rendre ces règles testables, il faut inverser la dépendance : le cœur définit des interfaces (ports) et reçoit ses dépendances par le constructeur, avec une horloge, un paiement et un stockage injectables. C'est l'objet du TP2.
