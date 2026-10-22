@@ -8,6 +8,7 @@ import { BookingStatsService } from "./BookingStatsService";
 import { calculatePrice } from "./price";
 
 const MAX_SEATS_PER_BOOKING = 6;
+const MIN_SEATS_PER_BOOKING = 1;
 const CANCELLATION_DEADLINE_MS = 2 * 60 * 60 * 1000;
 export class BookingService {
   private bookingRepository = new BookingRepository();
@@ -55,10 +56,10 @@ createBooking(
 
   const seats = Number(seatsInput);
 
-  if (!Number.isInteger(seats) || seats < 1 || seats > MAX_SEATS_PER_BOOKING) {
+  if (!Number.isInteger(seats) || seats < MIN_SEATS_PER_BOOKING || seats > MAX_SEATS_PER_BOOKING) {
     throw new BookingError(
       "INVALID_SEATS",
-      `Entre 1 et ${MAX_SEATS_PER_BOOKING} places par réservation`
+      `Entre ${MIN_SEATS_PER_BOOKING} et ${MAX_SEATS_PER_BOOKING} places par réservation`
     );
   }
 
@@ -69,11 +70,15 @@ createBooking(
     );
     
   }
-  const taken = this.bookingStatsService.countTakenSeats(screening.id);
+   const taken = this.bookingStatsService.countTakenSeats(screening.id);
+   const remaining = this.bookingStatsService.countRemainingSeats(
+     screening.capacity,
+     taken
+   );
 
-  if (taken + seats > screening.capacity) {
-    throw new BookingError("NOT_ENOUGH_SEATS", "Plus assez de places");
-  }
+   if (seats > remaining) {
+     throw new BookingError("NOT_ENOUGH_SEATS", "Plus assez de places");
+   }
 
   const total = calculatePrice(screening.price, seats, tariff);
 

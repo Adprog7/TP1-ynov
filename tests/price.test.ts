@@ -14,6 +14,18 @@ describe("calculatePrice", () => {
   it("applique la réduction de groupe", () => {
     expect(calculatePrice(1000, 4, "NORMAL")).toBe(3600);
   });
+
+  it("applique la réduction étudiante sur 2 places", () => {
+    expect(calculatePrice(1150, 2, "STUDENT")).toBe(1610);
+  });
+
+  it("applique la réduction de groupe sur 4 places au tarif normal", () => {
+    expect(calculatePrice(1150, 4, "NORMAL")).toBe(4140);
+  });
+
+  it("cumule réduction étudiante et réduction de groupe sur 4 places", () => {
+    expect(calculatePrice(1150, 4, "STUDENT")).toBe(2898);
+  });
 });
 
 describe("countRemainingSeats", () => {

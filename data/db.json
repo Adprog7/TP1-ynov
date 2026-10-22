@@ -4,7 +4,7 @@
       "id": "s1",
       "movie": "Dune: Part Three",
       "room": "Salle 1",
-      "startsAt": "2026-10-21T09:01:27.862Z",
+      "startsAt": "2026-10-23T09:33:04.337Z",
       "capacity": 120,
       "price": 1150
     },
@@ -12,7 +12,7 @@
       "id": "s2",
       "movie": "Le Comte de Monte-Cristo",
       "room": "Salle 2",
-      "startsAt": "2026-10-22T09:01:27.863Z",
+      "startsAt": "2026-10-24T09:33:04.338Z",
       "capacity": 80,
       "price": 1050
     },
@@ -20,7 +20,7 @@
       "id": "s3",
       "movie": "Avant-première surprise",
       "room": "Salle 3",
-      "startsAt": "2026-10-20T08:01:27.863Z",
+      "startsAt": "2026-10-22T08:33:04.338Z",
       "capacity": 10,
       "price": 900
     }
@@ -34,18 +34,58 @@
       "tariff": "NORMAL",
       "total": 4860,
       "status": "CONFIRMED",
-      "createdAt": "2026-10-20T07:01:27.863Z"
+      "createdAt": "2026-10-22T07:33:04.338Z"
     },
     {
-      "id": "b1792479860718",
+      "id": "b1792654400207",
       "screeningId": "s1",
-      "email": "test@example.com",
+      "email": "a@b.fr",
       "seats": 2,
       "tariff": "NORMAL",
       "total": 2300,
       "status": "CANCELLED",
-      "createdAt": "2026-10-20T07:04:20.719Z",
-      "cancelledAt": "2026-10-20T07:06:11.469Z"
+      "createdAt": "2026-10-22T07:33:20.207Z",
+      "cancelledAt": "2026-10-22T07:33:21.165Z"
+    },
+    {
+      "id": "b1792654400306",
+      "screeningId": "s1",
+      "email": "a@b.fr",
+      "seats": 2,
+      "tariff": "STUDENT",
+      "total": 1610,
+      "status": "CONFIRMED",
+      "createdAt": "2026-10-22T07:33:20.306Z"
+    },
+    {
+      "id": "b1792654400394",
+      "screeningId": "s1",
+      "email": "a@b.fr",
+      "seats": 4,
+      "tariff": "NORMAL",
+      "total": 4140,
+      "status": "CONFIRMED",
+      "createdAt": "2026-10-22T07:33:20.394Z"
+    },
+    {
+      "id": "b1792654400476",
+      "screeningId": "s1",
+      "email": "a@b.fr",
+      "seats": 4,
+      "tariff": "STUDENT",
+      "total": 2898,
+      "status": "CONFIRMED",
+      "createdAt": "2026-10-22T07:33:20.476Z"
+    },
+    {
+      "id": "b1792654400890",
+      "screeningId": "s3",
+      "email": "a@b.fr",
+      "seats": 2,
+      "tariff": "NORMAL",
+      "total": 1800,
+      "status": "CONFIRMED",
+      "createdAt": "2026-10-22T07:33:20.890Z"
     }
   ]
 }
