@@ -4,7 +4,7 @@
       "id": "s1",
       "movie": "Dune: Part Three",
       "room": "Salle 1",
-      "startsAt": "2026-10-23T09:43:31.479Z",
+      "startsAt": "2026-10-24T15:07:31.563Z",
       "capacity": 120,
       "price": 1150
     },
@@ -12,7 +12,7 @@
       "id": "s2",
       "movie": "Le Comte de Monte-Cristo",
       "room": "Salle 2",
-      "startsAt": "2026-10-24T09:43:31.480Z",
+      "startsAt": "2026-10-25T15:07:31.564Z",
       "capacity": 80,
       "price": 1050
     },
@@ -20,7 +20,7 @@
       "id": "s3",
       "movie": "Avant-première surprise",
       "room": "Salle 3",
-      "startsAt": "2026-10-22T08:43:31.480Z",
+      "startsAt": "2026-10-23T14:07:31.564Z",
       "capacity": 10,
       "price": 900
     }
@@ -34,58 +34,7 @@
       "tariff": "NORMAL",
       "total": 4860,
       "status": "CONFIRMED",
-      "createdAt": "2026-10-22T07:43:31.480Z"
-    },
-    {
-      "id": "b1792655062540",
-      "screeningId": "s1",
-      "email": "a@b.fr",
-      "seats": 2,
-      "tariff": "NORMAL",
-      "total": 2300,
-      "status": "CANCELLED",
-      "createdAt": "2026-10-22T07:44:22.541Z",
-      "cancelledAt": "2026-10-22T07:44:23.510Z"
-    },
-    {
-      "id": "b1792655062634",
-      "screeningId": "s1",
-      "email": "a@b.fr",
-      "seats": 2,
-      "tariff": "STUDENT",
-      "total": 1610,
-      "status": "CONFIRMED",
-      "createdAt": "2026-10-22T07:44:22.634Z"
-    },
-    {
-      "id": "b1792655062710",
-      "screeningId": "s1",
-      "email": "a@b.fr",
-      "seats": 4,
-      "tariff": "NORMAL",
-      "total": 4140,
-      "status": "CONFIRMED",
-      "createdAt": "2026-10-22T07:44:22.710Z"
-    },
-    {
-      "id": "b1792655062806",
-      "screeningId": "s1",
-      "email": "a@b.fr",
-      "seats": 4,
-      "tariff": "STUDENT",
-      "total": 2898,
-      "status": "CONFIRMED",
-      "createdAt": "2026-10-22T07:44:22.806Z"
-    },
-    {
-      "id": "b1792655063240",
-      "screeningId": "s3",
-      "email": "a@b.fr",
-      "seats": 2,
-      "tariff": "NORMAL",
-      "total": 1800,
-      "status": "CONFIRMED",
-      "createdAt": "2026-10-22T07:44:23.240Z"
+      "createdAt": "2026-10-23T13:07:31.564Z"
     }
   ]
 }

@@ -21,7 +21,7 @@ export class ListUpcomingScreeningsService implements ListUpcomingScreenings {
         movie: s.movie,
         room: s.room,
         startsAt: s.startsAt,
-        price: s.price,
+        price: s.unitPrice,
         remaining: remainingSeats(s.capacity, taken),
       });
     }

@@ -8,7 +8,8 @@
     "start": "tsx src/main.ts",
     "dev": "tsx watch src/main.ts",
     "test": "vitest run --passWithNoTests",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "start:json": "tsx src/main.ts --json"
   },
   "license": "UNLICENSED",
   "dependencies": {

@@ -13,7 +13,7 @@ const upcoming: Screening = {
   movie: "Dune",
   room: "Salle 1",
   startsAt: new Date("2026-10-20T18:00:00Z"),
-  price: 1000, // 10 €
+  unitPrice: 1000, // 10 €
   capacity: 10,
 };
 

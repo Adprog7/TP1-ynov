@@ -9,7 +9,7 @@ const NOW = new Date("2026-10-20T10:00:00Z");
 const TWO_HOURS = 2 * 60 * 60 * 1000;
 
 function screeningAt(startsAt: Date): Screening {
-  return { id: "s1", movie: "Dune", room: "Salle 1", startsAt, price: 1000, capacity: 10 };
+  return { id: "s1", movie: "Dune", room: "Salle 1", startsAt, unitPrice: 1000, capacity: 10 };
 }
 
 const confirmed: Booking = {

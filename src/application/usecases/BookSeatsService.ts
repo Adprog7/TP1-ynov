@@ -31,7 +31,7 @@ export class BookSeatsService implements BookSeats {
     assertBookable(screening, command.seats, taken, this.clock.now());
 
     const tariff: Tariff = command.tariff === "STUDENT" ? "STUDENT" : "NORMAL";
-    const total = computeTotal(screening.price, command.seats, tariff);
+    const total = computeTotal(screening.unitPrice, command.seats, tariff);
 
     if (!(await this.payment.charge(total))) {
       throw new DomainError("PAYMENT_REFUSED", "Paiement refusé");

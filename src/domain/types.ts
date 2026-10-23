@@ -5,7 +5,7 @@ export interface Screening {
   movie: string;
   room: string;
   startsAt: Date;
-  price: number; // centimes
+  unitPrice: number; // centimes
   capacity: number;
 }
 
