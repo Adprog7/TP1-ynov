@@ -7,4 +7,7 @@ export class InMemoryScreeningRepository implements ScreeningRepository {
   async findById(id: string): Promise<Screening | undefined> {
     return this.screenings.find((s) => s.id === id);
   }
+    async findStartingAfter(date: Date): Promise<Screening[]> {
+    return this.screenings.filter((s) => s.startsAt >= date);
+  }
 }

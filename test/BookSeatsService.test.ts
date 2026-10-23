@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { InMemoryBookingRepository } from "../src/adapters/out/persistence/InMemoryBookingRepository";
 import { InMemoryScreeningRepository } from "../src/adapters/out/persistence/InMemoryScreeningRepository";
 import { FakePaymentGateway } from "../src/adapters/out/payment/FakePaymentGateway";
-import { Notifier } from "../src/application/ports/out/Notifier";
+import { SpyNotifier } from "./helps/SpyNotifier";
 import { BookSeatsService } from "../src/application/usecases/BookSeatsService";
 import { Booking, Screening } from "../src/domain/types";
 
@@ -24,12 +24,6 @@ const started: Screening = {
 };
 
 // Notifier « espion » : mémorise les appels
-class SpyNotifier implements Notifier {
-  calls: { booking: Booking; movie: string }[] = [];
-  async bookingConfirmed(booking: Booking, movie: string): Promise<void> {
-    this.calls.push({ booking, movie });
-  }
-}
 
 function existingBooking(seats: number): Booking {
   return {
@@ -70,8 +64,8 @@ describe("BookSeatsService", () => {
     expect(booking.total).toBe(2520);
     expect(booking.status).toBe("CONFIRMED");
     expect(bookings.all()).toHaveLength(1);
-    expect(notifier.calls).toHaveLength(1);
-    expect(notifier.calls[0].movie).toBe("Dune");
+    expect(notifier.confirmed).toHaveLength(1);
+    expect(notifier.confirmed[0].movie).toBe("Dune");
   });
 
   it("refuse si la capacité de la salle est dépassée", async () => {
@@ -125,6 +119,6 @@ describe("BookSeatsService", () => {
     });
 
     expect(bookings.all()).toHaveLength(0);
-    expect(notifier.calls).toHaveLength(0);
+    expect(notifier.confirmed).toHaveLength(0);
   });
 });

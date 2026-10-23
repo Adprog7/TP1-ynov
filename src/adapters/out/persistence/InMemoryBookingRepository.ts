@@ -20,6 +20,13 @@ export class InMemoryBookingRepository implements BookingRepository {
     else this.bookings[index] = booking;
   }
 
+  async findById(id: string): Promise<Booking | undefined> {
+    return this.bookings.find((b) => b.id === id);
+  }
+
+  async findByEmail(email: string): Promise<Booking[]> {
+    return this.bookings.filter((b) => b.email === email);
+  }
   // Utile pour les tests : vérifier ce qui a été enregistré
   all(): Booking[] {
     return [...this.bookings];

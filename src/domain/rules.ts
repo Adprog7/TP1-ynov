@@ -1,5 +1,6 @@
 import { DomainError } from "./errors";
-import { Screening, Tariff } from "./types";
+import { Booking,Screening, Tariff } from "./types";
+
 
 const EMAIL_REGEX = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 export const MIN_SEATS_PER_BOOKING = 1;
@@ -7,6 +8,7 @@ export const MAX_SEATS_PER_BOOKING = 6;
 const STUDENT_FACTOR = 0.7;
 const GROUP_FACTOR = 0.9;
 const GROUP_MIN_SEATS = 4;
+const CANCELLATION_DEADLINE_MS = 2 * 60 * 60 * 1000; 
 
 export function assertValidEmail(email: unknown): asserts email is string {
   if (typeof email !== "string" || !EMAIL_REGEX.test(email)) {
@@ -29,7 +31,7 @@ export function assertBookable(
   if (screening.startsAt <= now) {
     throw new DomainError("CONFLICT", "La séance a déjà commencé");
   }
-  if (alreadyTaken + seats > screening.capacity) {
+  if (seats > remainingSeats(screening.capacity, alreadyTaken)) {
     throw new DomainError("CONFLICT", "Plus assez de places");
   }
 }
@@ -40,4 +42,21 @@ export function computeTotal(unitPrice: number, seats: number, tariff: Tariff): 
   let total = unit * seats;
   if (seats >= GROUP_MIN_SEATS) total = Math.round(total * GROUP_FACTOR);
   return total;
+}
+
+export function remainingSeats(capacity: number, taken: number): number {
+  return capacity - taken;
+}
+
+export function assertNotAlreadyCancelled(booking: Booking): void {
+  if (booking.status === "CANCELLED") {
+    throw new DomainError("CONFLICT", "Déjà annulée");
+  }
+}
+
+export function assertCancellable(screening: Screening, now: Date): void {
+  const diff = screening.startsAt.getTime() - now.getTime();
+  if (diff < CANCELLATION_DEADLINE_MS) {
+    throw new DomainError("CONFLICT", "Annulation impossible moins de 2h avant la séance");
+  }
 }
